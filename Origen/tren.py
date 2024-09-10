@@ -1,6 +1,6 @@
-# train.py
+# train.py (Entrenamiento)
 
-import pandas as pd
+import pandas as pd 
 import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import MinMaxScaler
@@ -37,7 +37,7 @@ bd['CONTR'] = bd['CONTRICAT'].map(contricat_mapping)
 contab_mapping = {    'MANUAL': 1,    'MANUAL/COMPUTARIZADO': 2,    'COMPUTARIZADO': 3}
 bd['CONT'] = bd['CONTAB'].map(contab_mapping)
 
-# Variables independientes y dependiente
+# Variables independientes y la variable dependiente
 X = bd[['MES', 'CONTR', 'CONT', 'ANEXOS', 'ANTIGUEDAD', 'PORC_LOC', 'PORC_TSB', 'PROM_SLE']]
 y = bd['RESULTADO']
 
@@ -46,19 +46,19 @@ imputer = KNNImputer(n_neighbors=5)
 X_imputed = imputer.fit_transform(X)
 X_imputed = pd.DataFrame(X_imputed, columns=X.columns)
 
-# Balanceo con SMOTE
+# Balanceo con SMOTE (Hago un  sobremuestreo)
 smote = SMOTE(random_state=42)
 X_balanced, y_balanced = smote.fit_resample(X_imputed, y)
 
-# División en entrenamiento y prueba
+# División en entrenamiento y prueba (70 / 30 )
 X_train, X_test, y_train, y_test = train_test_split(X_balanced, y_balanced, test_size=0.3, random_state=42)
 
-# Escalado
+# Escalado (Los datos no presentan un comportamiento normal, opto por un minmaxscaler)
 scaler = MinMaxScaler()
 X_train_scaled = scaler.fit_transform(X_train)
 X_test_scaled = scaler.transform(X_test)
 
-# Definir el modelo
+# Defino el modelo
 def create_model(reg_param=0.0001):
     model = Sequential()
     model.add(Dense(32, activation='relu', kernel_regularizer=l2(reg_param), input_shape=(X_train.shape[1],)))
@@ -68,12 +68,11 @@ def create_model(reg_param=0.0001):
     model.add(Dense(1, activation='sigmoid'))
     return model
 
-# Compilar y entrenar el modelo
+# Complo y entreno el modelo
 model = create_model()
 model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
 model.fit(X_train_scaled, y_train, epochs=100, batch_size=64, validation_split=0.2, verbose=1)
 
-# Guardar el modelo entrenado
+# Guardo mi modelo que he entrenado
 model.save('/app/Origen/model.h5')
 print("Modelo entrenado y guardado.")
-
