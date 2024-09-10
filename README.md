@@ -1,40 +1,30 @@
 # MGC2024
 ==============================
 
-Credit Default Prediction Project
-
-To see the data dictionary, you could visit: https://www.kaggle.com/datasets/uciml/default-of-credit-card-clients-dataset
+Trabajo realizado en la Sunafil para predecir el nivel de incumplimiento de las normas sociolaborales de las empresas juridicas en Lima Metropolitana
 
 Project Organization
 ------------
 
-    ├── LICENSE
     ├── README.md          <- The top-level README for developers using this project.
-    ├── data
-    │   ├── scores         <- Results from scoring model.
-    │   ├── processed      <- The final, canonical data sets for modeling.
-    │   └── raw            <- The original, immutable data dump.
     │
-    ├── models             <- Trained and serialized models, model predictions, or model summaries
+    ├── Datos
+    │   ├── MGC HOY        <- Data para analizar y construir el modelo
+    │   ├── processed      <- Data para predecir
+    │  
     │
-    ├── notebooks          <- Jupyter notebooks. Naming convention is a number (for ordering)
+    ├── cuaderno          <- cuaderno de trabajo de google Colab
     │
-    ├── requirements.txt   <- The requirements file for reproducing the analysis environment, e.g.
-    │                         generated with `pip freeze > requirements.txt`
     │
-    ├── setup.py           <- makes project pip installable (pip install -e .) so src can be imported
-    ├── src                <- Source code for use in this project.
-    │   ├── __init__.py    <- Makes src a Python module
+    ├── Origen            <- codigos usados en este proyectos
+    │
     │   │
-    │   ├── make_dataset.py<- Script to prepare data
-    │   │
-    │   ├── train.py       <- Script to train models
+    │   ├── train.py       <- código para el entrenamiento
     │   │                    
-    │   ├── evaluate.py    <- Script to evaluate models using kpi's
+    │   ├── evaluate.py    <- Código para la evaluación
     │   │
-    │   └── predict.py     <- Script to use trained models to make predictions
+    │   └── predict.py     <- Código para la predicción
     │
-    └── LICENSE            <- License
 
 
 --------
